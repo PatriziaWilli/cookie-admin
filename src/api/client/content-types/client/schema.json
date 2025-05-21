@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "clients",
+  "info": {
+    "singularName": "client",
+    "pluralName": "clients",
+    "displayName": "Client",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "domain": {
+      "type": "string"
+    },
+    "token": {
+      "type": "string"
+    },
+    "cookie_status": {
+      "type": "enumeration",
+      "enum": [
+        "active",
+        "paused",
+        "sospended"
+      ]
+    },
+    "cookies": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::cookie.cookie"
+    }
+  }
+}
