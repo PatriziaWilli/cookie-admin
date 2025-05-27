@@ -2,8 +2,8 @@
 FROM node:20-alpine AS builder
 WORKDIR /srv/strapi
 
-# Aumenta la memoria heap di Node per la build
-ENV NODE_OPTIONS=--max_old_space_size=1024
+# Aumenta la memoria heap di Node a 2 GB
+ENV NODE_OPTIONS=--max_old_space_size=2048
 
 # Installa tutte le dipendenze
 COPY package.json package-lock.json ./
@@ -18,7 +18,7 @@ FROM node:20-alpine
 WORKDIR /srv/strapi
 ENV NODE_ENV=production
 
-# Copia solo package + lock per installare le dipendenze di produzione
+# Installa solo le dipendenze di produzione
 COPY --from=builder /srv/strapi/package.json /srv/strapi/package-lock.json ./
 RUN npm ci --omit=dev
 
