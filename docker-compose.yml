@@ -1,23 +1,27 @@
 version: '3.8'
-
 services:
   strapi:
     build: .
-    image: yourdockerhubuser/cookie-admin:latest
-    container_name: cookie-admin
-    restart: unless-stopped
-    env_file:
-      - .env
+    restart: always
     ports:
       - "1337:1337"
+    env_file:
+      - .env
+    depends_on:
+      - db
     volumes:
-      - ./public:/srv/strapi/public
-      - ./src:/srv/strapi/src
+      # se usi import-clients.json per popolare i dati al primo avvio:
+      - ./export-clients.json:/srv/strapi/export-clients.json
 
-  watchtower:
-    image: containrrr/watchtower:latest
-    container_name: watchtower
-    restart: unless-stopped
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: cookie_admin_db
+      POSTGRES_USER: strapi
+      POSTGRES_PASSWORD: strapi_pass
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: --cleanup --interval 300
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
