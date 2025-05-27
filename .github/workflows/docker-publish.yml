@@ -7,7 +7,6 @@ on:
 jobs:
   build-push:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
@@ -20,7 +19,7 @@ jobs:
       - name: Log in to DigitalOcean Container Registry
         uses: docker/login-action@v2
         with:
-          registry: ${{ secrets.DOCR_REGISTRY }}
+          registry: registry.digitalocean.com
           username: do
           password: ${{ secrets.DOCR_TOKEN }}
 
@@ -29,4 +28,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCR_REGISTRY }}/cookie-admin:latest
+          tags: registry.digitalocean.com/cookie-admin:latest
