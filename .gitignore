@@ -16,3 +16,10 @@ database.db
 npm-debug.log*
 yarn-debug.log*
 
+
+# Ignora DB e dati di Strapi in locale
+.tmp/
+.strapi-updater.json
+
+# Ignora file macOS
+*.DS_Store
