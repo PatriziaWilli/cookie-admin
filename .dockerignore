@@ -1,0 +1,9 @@
+node_modules
+.tmp
+dist
+build
+public/uploads
+Dockerfile
+docker-compose.yml
+.git
+export-clients.json
